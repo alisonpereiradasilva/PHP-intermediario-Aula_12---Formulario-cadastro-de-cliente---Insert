@@ -1,0 +1,59 @@
+Cadastro de Clientes com Banco de dados phpmyadmin
+Banco de dados = CADASTRO
+Table = CLIENTES
+
+id = not null auto increment
+nome = Varchar 50 not null
+endereco = Varchar 50 not null
+cidade = Varchar 50 not null
+estado = Varchar 50 not null
+pais = Varchar 50 not null
+celular = Varchar 50 not null
+email = Varchar 50 not null
+
+--------------------------------------------------------------------------------------------------------------------------------------
+FORMULÁRIO DE CADASTRO -> CADASTRO.PHP
+
+<html>
+<head><title> Sistema de Cadastros </title></head>
+<body>
+<form name="signup" method="post" action="cadastrando.php">
+<label> NOME COMPLETO: </label><input type="text" name="nome" /><br />
+<label> ENDEREÇO: </label><input type="text" name="endereco" /><br />
+<label> CIDADE: </label><input type="text" name="cidade" /><br />
+<label> ESTADO: </label><input type="text" name="estado" /><br />
+<label> PAÍS: </label><input type="text" name="pais" /><br />
+<label> CELULAR: </label><input type="text" name="celular" /><br />
+<label> E-MAIL: </label><input type="text" name="email" /><br />
+<input type="submit" value="CADASTRAR">
+<input type="reset" value="NOVO CADASTRO">
+</form>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------
+ARQUIVO INTEGRAÇÃO  -> CADASTRANDO.PHP
+
+<html><head><title> Cadastro de clientes</title></head>
+<body>
+<?php
+$host="localhost";
+$user="root";
+$pass="alison";
+$banco="CADASTRO";
+$conexao=mysql_connect("localhost", "root", "alison") or die ("Banco de Dados Off_line"); //mysql_error()
+mysql_select_db($banco) or die ("Banco de Dados não conectado");
+?>
+<?php
+$nome=$_POST['nome'];
+$endereco=$_POST['endereco'];
+$cidade=$_POST['cidade'];
+$estado=$_POST['estado'];
+$pais=$_POST['pais'];
+$celular=$_POST['celular'];
+$email=$_POST['email'];
+$sql=mysql_query("INSERT INTO CLIENTES(nome, endereco, cidade, estado, pais, celular, email) VALUES
+('$nome', '$endereco', '$cidade', '$estado', '$pais', '$celular', '$email')");
+echo"Dados cadastrados com sucesso!";
+?>
+</body>
+</html>
